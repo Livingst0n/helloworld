@@ -1,17 +1,33 @@
 ﻿$(document).ready(function () {
+    //$.support.cors = true;
+    //$.mobile.allowCrossDomainPages = true;
     jQuery('#clickme').on('click', function () {
         jQuery('#display').text("Hello worldlings!");
     });
 
     var url = 'http://pjc.gear.host/api/Hello';
-    $.getJSON(url)
+    /*$.getJSON(url)
         .done(function (data) {
             //stuff
             $.each(data, function (key, item) {
                 //more stuff
                 $('<li>', { text: formatItem(item) }).appendTo($('#records'));
             });
-        });
+        });*/
+
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+        success: function (data, status) {
+            $.each(data, function (key, item) {
+                $('<li>', { text: formatItem(item) }).appendTo($('#records'));
+            });
+        },
+        error: function () {
+            //error loading data
+        }
+    });
 
     function formatItem(item) {
         return item.helloID + ":" + item.helloLanguage + ":" + item.helloMessage + ".";
