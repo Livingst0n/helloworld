@@ -62,5 +62,28 @@
 //app.initialize();
 
 jQuery(document).ready(function () {
-    alert("hi");
+    jQuery(document).ready(function () {
+        var url = 'http://pjc.gear.host/api/DeleteHello/17';
+
+        var myLanguage = jQuery("#language").val();
+        var myMessage = jQuery("#message").val();
+
+        jQuery('#submitButton').on('click', function () {
+            /*$.post(url, { helloLanguage: myLanguage, helloMessage: myMessage })
+                .done(function (data) {
+                    alert("Data Loaded: " + data);
+                });*/
+            $.ajax({
+                url: url,
+                type: "DELETE",
+                data: { helloLanguage: myLanguage, helloMessage: myMessage },
+                success: function (data, textStatus, jqXHR) {
+                    alert("success");
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("failure: " + errorThrown + ":" + jqXHR[0] + ":" + textStatus);
+                }
+            });
+        });
+    });
 });
